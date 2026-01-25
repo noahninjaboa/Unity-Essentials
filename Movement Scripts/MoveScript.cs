@@ -1,4 +1,4 @@
-using UnityEngine;          //this is a simple script with movement, running, and flipping when changing directions
+using UnityEngine;          //this is a simple platformer script with movement, running, and flipping when changing directions
 using UnityEngine.InputSystem;
 using System;
 public class MoveScript : MonoBehaviour
@@ -6,7 +6,7 @@ public class MoveScript : MonoBehaviour
     [SerializeField] float speed = 5.0f;
     [SerializeField] float moveDirection = 0;
     [SerializeField] float runSpeed = 15f;
-    public float geckoDirection = 1;
+    public float direction = 1;
 
     private Rigidbody2D rb;
 
@@ -35,8 +35,7 @@ public class MoveScript : MonoBehaviour
             if (transform.localScale != new Vector3(1, 1, 1))
             {
                 transform.localScale = new Vector3(1, 1, 1);
-                OnTurn?.Invoke();
-                geckoDirection = 1;
+                direction = 1;
                 
             }
         }
@@ -44,8 +43,7 @@ public class MoveScript : MonoBehaviour
         {
             moveDirection = -1f;
             transform.localScale = new Vector3(-1, 1, 1);
-            OnTurn?.Invoke();
-            geckoDirection = -1;
+            direction = -1;
         }
     }
 
