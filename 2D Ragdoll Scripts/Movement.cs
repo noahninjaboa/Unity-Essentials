@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float jumpForce = 7f;
 
     [SerializeField] Rigidbody2D bodyRb;
-    bool isGrounded;
+    public bool isGrounded;
 
     private bool isSteppingRight = false;
     private bool isSteppingLeft = false;
@@ -26,9 +26,15 @@ public class Movement : MonoBehaviour
         rightLegRb = rightLeg.GetComponent<Rigidbody2D>();
 
     }
-
     void Update()
     {
+        if (Keyboard.current.spaceKey.isPressed && isGrounded)
+        {
+            bodyRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        isGrounded = false;
+
+
 
         if (Keyboard.current.dKey.isPressed)
         {
@@ -51,11 +57,19 @@ public class Movement : MonoBehaviour
 
 
 
+
     
         else
         {
             anim.Play("Idle");
         }
+
+
+
+
+
+
+
     }
     IEnumerator MoveRight(float seconds)
     {
@@ -76,14 +90,6 @@ public class Movement : MonoBehaviour
         leftLegRb.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
 
         isSteppingLeft = false;
-
-
-    if (Keyboard.current.spaceKey.isPressed)
-    {
-            bodyRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-    }   
-     
-
 
     }
 
