@@ -1,0 +1,1 @@
+These are some scripts that act as a basic combat system. They use get component in order to identify if a gameobject has the IDamageable script, in order to know if it can be damaged.

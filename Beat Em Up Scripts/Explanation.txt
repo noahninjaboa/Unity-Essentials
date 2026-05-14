@@ -1,0 +1,1 @@
+Here are some of the most reusable scripts from a prototype Beat 'em up project I made. They include basic systems for attacking/taking damage, and render sorting based on Y.

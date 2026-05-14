@@ -1,0 +1,7 @@
+Use 'Open in Terminal' then:
+
+
+git status
+git add .
+git commit -m "Description"
+git push
