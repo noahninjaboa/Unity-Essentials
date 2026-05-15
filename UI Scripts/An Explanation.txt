@@ -1,0 +1,1 @@
+These are a collection of boilerplate scripts for making unity UI features, such as a healthbar with a smooth animation for going from A -> B.
