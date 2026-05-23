@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CinemachineTargetScript : MonoBehaviour
+public class IsGround : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,10 +12,5 @@ public class CinemachineTargetScript : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void LateUpdate()
-    {
-        transform.position = Player.Instance.transform.position;    
     }
 }

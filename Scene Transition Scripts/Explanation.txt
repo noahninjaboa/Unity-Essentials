@@ -1,6 +1,0 @@
-This is a compilation of useful scripts for making a character that can change scenes in specific locations and return, ex. the player entering a building and exiting again in the same spot. 
-
-It also includes a script to fix the Cinemachine by making a gameobject that stays on top of the player, so the cinemachine doesn't break 
-when the player returns to the scene.
-
-The system used was by having SpawnIds that would link to an object that the player would teleport to, supported by a public static string.

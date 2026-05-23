@@ -1,95 +1,79 @@
 using UnityEngine;        
 using UnityEngine.InputSystem;
-using System;
 public class PlayerMovingScript : MonoBehaviour
 {
     [SerializeField] float speed = 1.0f;
-    [SerializeField] float moveDirection = 0;
-    [SerializeField] float stepSpeed = 0f;
 
-    public float direction = 1;
+
+    [SerializeField] float jumpStrength = 5f;
+
+    [SerializeField] private int direction = 0;
+
+    [SerializeField] private float frictionMultiplierX = 0.95f;  //friction multiplier comes into effect when player isn't trying to move
 
     private Rigidbody2D rb;
-    private BoxCollider2D boxCollider2d;
+
+    [SerializeField] private bool grounded = false;
+
+    public void changeGrounded(bool value)
+    {
+        grounded = value;
+
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        boxCollider2d = GetComponent<BoxCollider2D>();
     }
-    void Start()
-    {
-
-    }
-
+   
 
     void Update()
     {
-
+        
     
 
         if (Keyboard.current.dKey.isPressed)
         {
-            moveDirection = 1f;
-           
-            transform.localScale = new Vector3(1, 1, 1);
             direction = 1;
 
             
         }
         else if (Keyboard.current.aKey.isPressed)
         {
-            moveDirection = -1f;
-            transform.localScale = new Vector3(-1, 1, 1);
             direction = -1;
+
         }
-        if (Keyboard.current.spaceKey.isPressed)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            //jumping logic
+            if (grounded)
+            {
+                rb.linearVelocityY = jumpStrength;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        stepSpeed = speed * moveDirection;
-
-        if ( grounded())
+       if (direction != 0)
         {
-            rb.linearVelocityX = stepSpeed;
+            rb.linearVelocityX = speed * direction;
 
-        }
-
-
-
-        stepSpeed = 0f;
-        moveDirection = 0f;
-    }
-
-    private bool grounded()
-    {
-        float extraHeight = 0.1f;
-
-        RaycastHit2D raycast = Physics2D.Raycast(boxCollider2d.bounds.center, Vector2.down, boxCollider2d.bounds.extents.y + extraHeight);
-
-        Color rayColor = Color.red;
-
-
-        if (raycast.collider != null)
-        {
-            rayColor = Color.green;
-            Debug.DrawRay(boxCollider2d.bounds.center, Vector2.down * boxCollider2d.bounds.extents.y, rayColor);
-
-            return true;
+            direction = 0;
         }
         else
         {
-            rayColor = Color.red;
-            Debug.DrawRay(boxCollider2d.bounds.center, Vector2.down * boxCollider2d.bounds.extents.y, rayColor);
-
-            return false;
+            rb.linearVelocityX = rb.linearVelocityX * frictionMultiplierX;
         }
 
+            
 
 
     }
+
+
+
+
+
+
 
 }
